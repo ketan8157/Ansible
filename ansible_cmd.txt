@@ -2,6 +2,14 @@
 "yum install ansible-core -y"
 
 #Ansible Commands (Ad-hoc commands)
-1. ansible all --list-hosts  # to see all the manage node connected to the controller node
-2. ansible localhost -m package -a " name=httpd state=present" #install httpd web server using Ansible on the Ansible controller Node
-3. ansible localhost -m package -a "name=software_name state=removed" # delete a particular software/package using Ansible on the Ansible controller Node
+1. ansible all --list-hosts  # to see all the manage node connected to the controller node.
+2. ansible localhost -m package -a " name=httpd state=present" #install httpd web server using Ansible on the Ansible controller Node.
+3. ansible localhost -m package -a "name=software_name state=removed" # delete a particular software/package using Ansible on the Ansible controller Node.
+4. ansible all -m ping # to ping to all manage node to check they are up or not.
+
+Web Server Configuration using Ansible Ad-hoc Commands
+-------------------------------------------------------
+ 1. ansible localhost -m package -a "name='httpd' state=present" #install webserver.
+ 2. ansible localhost -m copy -a "dest='/var/www/html/index.html' src='/root/index.html'" # copy webpage to document root of webserver.
+ 3. ansible localhost -m service -a "name=httpd state=started"  # start the webserver httpd service.
+ 4. ansible localhost -m firewalld -a"immediate=yes  permanent=true port=80/tcp state=enabled" # add firewall rule to enabled to access on this port to outside.
