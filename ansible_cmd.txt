@@ -1,0 +1,7 @@
+#install Ansible in Redhat 
+"yum install ansible-core -y"
+
+#Ansible Commands (Ad-hoc commands)
+1. ansible all --list-hosts  # to see all the manage node connected to the controller node
+2. ansible localhost -m package -a " name=httpd state=present" #install httpd web server using Ansible on the Ansible controller Node
+3. ansible localhost -m package -a "name=software_name state=removed" # delete a particular software/package using Ansible on the Ansible controller Node
