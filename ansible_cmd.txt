@@ -8,7 +8,7 @@
 4. ansible all -m ping # to ping to all manage node to check they are up or not.
 5. ansible-doc -l  # TO see all the current module of ansible available in the system(run in controller node)
 6. ansible-doc Module_Name # To see details about the particular module
-
+7.ansible all -m command -a date # run the date command on all the manage command
 
 Web Server Configuration using Ansible Ad-hoc Commands
 -------------------------------------------------------
