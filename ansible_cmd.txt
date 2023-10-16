@@ -16,3 +16,14 @@ Web Server Configuration using Ansible Ad-hoc Commands
  2. ansible localhost -m copy -a "dest='/var/www/html/index.html' src='/root/index.html'" # copy webpage to document root of webserver.
  3. ansible localhost -m service -a "name=httpd state=started"  # start the webserver httpd service.
  4. ansible localhost -m firewalld -a"immediate=yes  permanent=true port=80/tcp state=enabled" # add firewall rule to enabled to access on this port to outside.
+
+
+Ansible Facts
+--------------
+Ansible fact are the details/information about the managed node that come on the real time.
+Module we use for facts gathering : Setup
+Example:
+1. ansible all -m setup # return all the real time information of all the managed node.
+2. ansible all -m setup -a "filter=ansible_env" # return the environmental variable of the manged Node.
+3. ansible all -m setup -a "filter=ansible_architecture " # return the architecture details of thr managed Node.
+4. ansible all -m setup -a "filter=ansible_facts.ansible_all_ipv4_addresses" # return the ipv4 value of the manged node.
