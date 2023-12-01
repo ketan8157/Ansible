@@ -1,0 +1,51 @@
+- hosts : web
+  vars:
+    - software: "httpd"
+
+  tasks:
+  - name: "Installing the Web Server"
+    package:
+      name: "{{software}}"
+      state: present
+
+  - name: "Start the Web Service of the Webserver :- httpd "
+    service:
+      name: "{{software}}"
+      state: "started"
+      enabled: "yes"
+- hosts: host1 
+  vars:
+    - webpage_Src : "/root/load_balancer/index1.html"
+    - webpage_Dest: "/var/www/html/index.html"
+  tasks:  
+   - name:"Web Page Copying to the web Server Document Root"
+     copy:
+      src: "{{webpage_Src}}"
+      dest: "{{webpage_Dest}}"
+- hosts: host2
+  vars:
+    - webpage_Src : "/root/load_balancer/index2.html"
+    - webpage_Dest: "/var/www/html/index.html"
+  tasks:
+   - name:"Web Page Copying to the web Server Document Root"
+     copy:
+      src: "{{webpage_Src}}"
+      dest: "{{webpage_Dest}}"
+
+- hosts: haproxy
+  vars:
+    - software_web: "httpd"
+    - software_lb: "haproxy"
+  tasks:
+  - name :"Installing WebServere On HaProxy Server"
+    package:
+      name: "{{software_web}}"
+      state: present
+  - name :"Installing HaProxy Software On HaProxy Server"
+    package:
+      name: "{{software_lb}}"
+      state: present
+  - name: " Create the Configuration file for load Balancing of WebServer"
+    template:
+      src:"/root/load_balancer/ha_conf.j2"
+      dest: "/etc/haproxy/conf.d/ketan.cfg"
